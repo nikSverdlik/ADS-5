@@ -40,7 +40,7 @@ std::string infx2pstfx(const std::string& inf) {
       if (!stack.isEmpty()) stack.pop();
     } else if (isOper(c)) {
       int p = getPriority(c);
-      while (!stack.isEmpty() && stack.top() != '(' && 
+      while (!stack.isEmpty() && stack.top() != '(' &&
         getPriority(stack.top()) >= p) {
         result += stack.pop();
         result += ' ';
