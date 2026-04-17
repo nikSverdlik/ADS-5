@@ -19,8 +19,7 @@ int getPriority(char op) {
 
 std::string infx2pstfx(const std::string& inf) {
   TStack<char, 100> stack;
-  std::string result;
-  
+  std::string result;  
   for (int i = 0; i < inf.length(); i++) {
     char c = inf[i];
     if (c == ' ') continue;
@@ -31,18 +30,17 @@ std::string infx2pstfx(const std::string& inf) {
       }
       result += ' ';
       i--;
-    }else if (c == '(') {
+    } else if (c == '(') {
       stack.push(c);
-    }else if (c == ')') {
+    } else if (c == ')') {
       while (!stack.isEmpty() && stack.top() != '(') {
         result += stack.pop();
         result += ' ';
       }
       if (!stack.isEmpty()) stack.pop();
-    }else if (isOper(c)) {
+    } else if (isOper(c)) {
       int p = getPriority(c);
-      while (!stack.isEmpty() && stack.top() != '(' && 
-             getPriority(stack.top()) >= p) {
+      while (!stack.isEmpty() && stack.top() != '(' && getPriority(stack.top()) >= p) {
         result += stack.pop();
         result += ' ';
       }
@@ -65,7 +63,6 @@ std::string infx2pstfx(const std::string& inf) {
 
 int eval(const std::string& pref) {
 TStack<int, 100> stack;
-  
   for (int i = 0; i < pref.length(); i++) {
     char c = pref[i];
     if (c == ' ') continue;
@@ -77,16 +74,14 @@ TStack<int, 100> stack;
       }
       stack.push(num);
       i--;
-    }else if (isOper(c)) {
+    } else if (isOper(c)) {
       int b = stack.pop();
       int a = stack.pop();
-      
       if (c == '+') stack.push(a + b);
       else if (c == '-') stack.push(a - b);
       else if (c == '*') stack.push(a * b);
       else if (c == '/') stack.push(a / b);
     }
   }
-  
   return stack.pop();
 }
