@@ -19,7 +19,7 @@ int getPriority(char op) {
 
 std::string infx2pstfx(const std::string& inf) {
   TStack<char, 100> stack;
-  std::string result;  
+  std::string result;
   for (int i = 0; i < inf.length(); i++) {
     char c = inf[i];
     if (c == ' ') continue;
@@ -40,7 +40,8 @@ std::string infx2pstfx(const std::string& inf) {
       if (!stack.isEmpty()) stack.pop();
     } else if (isOper(c)) {
       int p = getPriority(c);
-      while (!stack.isEmpty() && stack.top() != '(' && getPriority(stack.top()) >= p) {
+      while (!stack.isEmpty() && stack.top() != '(' && 
+        getPriority(stack.top()) >= p) {
         result += stack.pop();
         result += ' ';
       }
